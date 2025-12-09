@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.png">
+<title>Lintra Cloud – Your Private Cloud Alternative to Microsoft 365</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #0a0a0a;
+        color: #e0e0e0;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    :root {
+        --cyan: #41e0ff;
+        --purple: #c45bff;
+        --dark: #0d0d0d;
+        --card-bg: #141414;
+    }
+
+    .hero {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 20px;
+        position: relative;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(65,224,255,0.15) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .logo {
+        width: 180px;
+        margin-bottom: 40px;
+        filter: drop-shadow(0 0 40px rgba(65,224,255,0.3));
+        animation: float 3s ease-in-out infinite;
+        position: relative;
+        z-index: 1;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        position: relative;
+        z-index: 1;
+    }
+
+    .tagline {
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        color: #b0b0b0;
+        margin-bottom: 15px;
+        font-weight: 300;
+        position: relative;
+        z-index: 1;
+    }
+
+    .subtitle {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: #888;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-group {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta {
+        padding: 16px 36px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .cta-primary {
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        color: var(--dark);
+        box-shadow: 0 8px 25px rgba(65,224,255,0.3);
+    }
+
+    .cta-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(65,224,255,0.4);
+    }
+
+    .cta-secondary {
+        background: transparent;
+        color: var(--cyan);
+        border: 2px solid var(--cyan);
+    }
+
+    .cta-secondary:hover {
+        background: rgba(65,224,255,0.1);
+        transform: translateY(-2px);
+    }
+
+    .section {
+        padding: 100px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        text-align: center;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #888;
+        font-size: 1.1rem;
+        margin-bottom: 60px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .card {
+        background: var(--card-bg);
+        padding: 35px;
+        border-radius: 16px;
+        border: 1px solid #1a1a1a;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--cyan), var(--purple));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #2a2a2a;
+        box-shadow: 0 15px 40px rgba(65,224,255,0.15);
+    }
+
+    .card:hover::before {
+        opacity: 1;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .card h4 {
+        color: var(--cyan);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .card p {
+        color: #aaa;
+        line-height: 1.7;
+    }
+
+    .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .price-card {
+        background: var(--card-bg);
+        padding: 45px 35px;
+        border-radius: 16px;
+        border: 1px solid #1a1a1a;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .price-card.featured {
+        border-color: var(--cyan);
+        box-shadow: 0 0 30px rgba(65,224,255,0.2);
+    }
+
+    .price-card.featured::before {
+        content: 'MOST POPULAR';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        color: var(--dark);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .price-card:hover {
+        transform: translateY(-8px);
+        border-color: #2a2a2a;
+        box-shadow: 0 20px 50px rgba(65,224,255,0.2);
+    }
+
+    .price-card h4 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .price {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 20px 0;
+        color: #fff;
+    }
+
+    .price span {
+        font-size: 1.2rem;
+        color: #666;
+        font-weight: 400;
+    }
+
+    .price-features {
+        list-style: none;
+        margin: 30px 0;
+        text-align: left;
+    }
+
+    .price-features li {
+        padding: 12px 0;
+        color: #aaa;
+        border-bottom: 1px solid #1a1a1a;
+    }
+
+    .price-features li:last-child {
+        border-bottom: none;
+    }
+
+    .price-features li::before {
+        content: '✓';
+        color: var(--cyan);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .contact {
+        background: var(--card-bg);
+        padding: 60px 40px;
+        border-radius: 16px;
+        max-width: 700px;
+        margin: 80px auto 0;
+        border: 1px solid #1a1a1a;
+    }
+
+    .contact h3 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .contact > p {
+        color: #888;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .contact-info {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 1px solid #1a1a1a;
+    }
+
+    .contact-info p {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-info a {
+        color: var(--cyan);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+    /* Form Styles */
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    form label {
+        color: #aaa;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    form input,
+    form textarea {
+        background: #0a0a0a;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 14px 16px;
+        color: #e0e0e0;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+    }
+
+    form input:focus,
+    form textarea:focus {
+        outline: none;
+        border-color: var(--cyan);
+        box-shadow: 0 0 0 3px rgba(65,224,255,0.1);
+    }
+
+    form textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+    form button {
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        color: var(--dark);
+        border: none;
+        padding: 16px 36px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(65,224,255,0.3);
+    }
+
+    form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(65,224,255,0.4);
+    }
+
+    footer {
+        text-align: center;
+        padding: 50px 20px;
+        color: #555;
+        border-top: 1px solid #1a1a1a;
+        margin-top: 100px;
+    }
+
+    footer a {
+        color: var(--cyan);
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <img src="logo.png" class="logo" alt="Lintra.cloud Logo">
+    <h1>Your Private Cloud. Your Data. Your Control.</h1>
+    <p class="tagline">A modern, Linux-powered alternative to Microsoft 365</p>
+    <p class="subtitle">Stop paying monthly subscriptions for software you don't own. Get secure, self-hosted infrastructure that actually belongs to you.</p>
+
+    <div class="cta-group">
+        <a href="#pricing" class="cta cta-primary">View Pricing</a>
+        <a href="#contact" class="cta cta-secondary">Schedule a Demo</a>
+    </div>
+</div>
+
+<div class="section">
+    <h2 class="section-title">What's Included</h2>
+    <p class="section-subtitle">Everything you need to run your business without Big Tech</p>
+
+    <div class="features">
+        <div class="card">
+            <span class="card-icon">🔐</span>
+            <h4>Private Identity (SSO)</h4>
+            <p>Single sign-on for your team with multi-factor authentication. Manage all user access from one central dashboard. No more password chaos.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">☁️</span>
+            <h4>Private Cloud Workspace</h4>
+            <p>File storage, document collaboration, team chat, and video calls. Like Google Workspace, but on your own infrastructure.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🔑</span>
+            <h4>Password Manager</h4>
+            <p>Self-hosted password vault for your whole team. Works with all browsers and devices. Zero monthly fees to third parties.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🛡️</span>
+            <h4>Zero-Trust Networking</h4>
+            <p>Secure remote access via Tailscale VPN. Work from anywhere without exposing your infrastructure to the internet.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">📊</span>
+            <h4>Uptime Monitoring</h4>
+            <p>24/7 service monitoring with instant alerts. We know when something breaks before you do.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🛠️</span>
+            <h4>Managed Support</h4>
+            <p>Onboarding, migration help, ongoing maintenance, and remote troubleshooting. We handle the technical stuff.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="pricing">
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <p class="section-subtitle">No hidden fees. No vendor lock-in. Cancel anytime.</p>
+
+    <div class="pricing">
+        <div class="price-card">
+            <h4>Starter</h4>
+            <div class="price">$40<span>/user/mo</span></div>
+            <ul class="price-features">
+                <li>Private cloud storage</li>
+                <li>Single sign-on (SSO)</li>
+                <li>Password manager</li>
+                <li>Secure remote access</li>
+                <li>Email support</li>
+            </ul>
+            <a href="#contact" class="cta cta-secondary">Get Started</a>
+        </div>
+
+        <div class="price-card featured">
+            <h4>Business</h4>
+            <div class="price">$60<span>/user/mo</span></div>
+            <ul class="price-features">
+                <li>Everything in Starter</li>
+                <li>Onboarding & migration</li>
+                <li>Team training</li>
+                <li>Priority support</li>
+                <li>Custom integrations</li>
+            </ul>
+            <a href="#contact" class="cta cta-primary">Get Started</a>
+        </div>
+
+        <div class="price-card">
+            <h4>Enterprise</h4>
+            <div class="price">$75<span>/user/mo</span></div>
+            <ul class="price-features">
+                <li>Everything in Business</li>
+                <li>Compliance packages</li>
+                <li>Automated backups</li>
+                <li>Dedicated support</li>
+                <li>SLA guarantees</li>
+            </ul>
+            <a href="#contact" class="cta cta-secondary">Get Started</a>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="contact">
+    <div class="contact">
+        <h3>Ready to Get Started?</h3>
+        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+
+        <form action="https://formsubmit.co/mwells@lintra.cloud" method="POST">
+            <input type="hidden" name="_subject" value="New inquiry from Lintra.cloud">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@company.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone (optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="(662) 555-1234">
+            </div>
+
+            <div class="form-group">
+                <label for="message">How can we help?</label>
+                <textarea id="message" name="message" placeholder="Tell us about your needs..."></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <p>Or reach us directly:</p>
+            <p>
+                <a href="tel:+16622923217">(662) 292-3217</a> •
+                <a href="mailto:mwells@lintra.cloud">mwells@lintra.cloud</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2025 Lintra Cloud — Little Rock, Arkansas<br>
+    Powered by Linux & Open Source<br>
+    <a href="mailto:mwells@lintra.cloud">mwells@lintra.cloud</a>
+</footer>
+
+</body>
+</html>
