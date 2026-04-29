@@ -1,0 +1,18 @@
+services:
+  ldap:
+    image: quay.io/389ds/dirsrv:latest
+    container_name: ldap-389ds
+    hostname: ldap.lintra.local
+    restart: unless-stopped
+    environment:
+      DS_SUFFIX: dc=lintra,dc=local
+      DS_DM_PASSWORD: ${DS_DM_PASSWORD}
+      DS_CREATE_SUFFIX_ENTRY: "true"
+    ports:
+      - "3389:3389"
+      - "3636:3636"
+    volumes:
+      - ldap_data:/data
+
+volumes:
+  ldap_data:

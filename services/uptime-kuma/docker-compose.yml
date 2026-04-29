@@ -1,0 +1,20 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - uptime-kuma:/app/data
+    networks:
+      - lintra
+    extra_hosts:
+      - "nextcloud.lintra:100.100.130.90"
+      - "vault.lintra:100.100.130.90"
+      - "status.lintra:100.100.130.90"
+    restart: unless-stopped
+
+volumes:
+  uptime-kuma:
+
+networks:
+  lintra:
+    external: true

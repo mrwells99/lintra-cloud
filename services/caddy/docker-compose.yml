@@ -1,0 +1,25 @@
+services:
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./certs:/certs:ro
+      - ../public:/public:ro
+    networks:
+      - lintra
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  lintra:
+    external: true

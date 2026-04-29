@@ -1,0 +1,38 @@
+nextcloud.lintra {
+    tls /certs/nextcloud.lintra.crt /certs/nextcloud.lintra.key
+
+    reverse_proxy nextcloud:80 {
+        header_up X-Forwarded-Proto https
+        header_up X-Forwarded-Host {host}
+    }
+}
+status.lintra {
+    tls /certs/status.lintra.crt /certs/status.lintra.key
+    reverse_proxy uptime-kuma:3001
+}
+# Internal cert distribution over Tailscale — network layer encrypted, TLS not required
+http://100.100.130.90:8080 {
+    root * /certs/ca-public
+    file_server browse
+}
+
+fleet.lintra {
+    tls /certs/fleet.lintra.crt /certs/fleet.lintra.key
+    reverse_proxy 100.65.58.104:1337
+}
+
+office.lintra.internal {
+    tls /certs/office.lintra.internal.crt /certs/office.lintra.internal.key
+    reverse_proxy onlyoffice:80
+}
+
+wazuh.lintra {
+    tls /certs/wazuh.lintra.crt /certs/wazuh.lintra.key
+    reverse_proxy https://100.100.229.85:443 {
+        transport http {
+            tls
+            tls_insecure_skip_verify
+        }
+    }
+    encode zstd gzip
+}
