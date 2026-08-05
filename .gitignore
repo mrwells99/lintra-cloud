@@ -1,0 +1,4 @@
+# Hugo build output and generated resource cache — both are rebuilt by CI.
+/public/
+/resources/_gen/
+.hugo_build.lock

@@ -1,0 +1,420 @@
+/* Lintra — typography-first, no webfonts, no external requests.
+   Legibility over flash: long technical posts have to read well. */
+
+:root {
+  --bg:        #fdfdfc;
+  --surface:   #f5f4f0;
+  --text:      #1a1a1a;
+  --muted:     #5a5a5a;
+  --accent:    #0f6f7d;  /* brand cyan, darkened for AA contrast on light */
+  --accent-hi: #0a5560;
+  --rule:      #e5e3de;
+  --code-bg:   #f5f4f0;
+
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --measure: 68ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #101211;
+    --surface:   #1a1d1c;
+    --text:      #e8e6e1;
+    --muted:     #9a9894;
+    --accent:    #41e0ff;  /* full brand cyan reads fine on near-black */
+    --accent-hi: #7feaff;
+    --rule:      #2a2e2d;
+    --code-bg:   #171a19;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-hi); }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: 1rem; top: 1rem;
+  z-index: 10;
+  background: var(--bg);
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+  max-width: 78ch;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.brand-mark { display: block; height: auto; }
+.brand-name { font-size: 1.05rem; }
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.94rem;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
+.nav-email { color: var(--accent) !important; }
+.nav-email:hover { text-decoration: underline; }
+
+/* ---------- shared blocks ---------- */
+
+main { padding: 3.5rem 0 4.5rem; }
+
+h1, h2, h3, h4 {
+  font-family: var(--sans);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+}
+
+h1 { font-size: clamp(1.85rem, 4.2vw, 2.4rem); margin: 0 0 0.6rem; }
+
+.page-head { margin-bottom: 2.5rem; }
+.page-intro { color: var(--muted); }
+
+.post-standfirst {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+  line-height: 1.55;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sep { margin: 0 0.4rem; color: var(--rule); }
+
+/* ---------- home ---------- */
+
+.intro { margin-bottom: 4rem; }
+.intro h1 { max-width: 26ch; }
+.intro-body { color: var(--muted); font-size: 1.15rem; }
+.intro-body p { margin: 1rem 0; }
+.intro-body a { color: var(--accent); }
+
+/* ---------- post list ---------- */
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+
+.post-item + .post-item { border-top: 1px solid var(--rule); }
+
+.post-link {
+  display: block;
+  padding: 1.6rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+.post-link:hover .post-title { color: var(--accent); }
+
+.post-title {
+  font-size: 1.32rem;
+  margin: 0 0 0.4rem;
+  transition: color 0.15s ease;
+}
+
+.post-desc {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.post-meta {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+.post-meta a { color: var(--muted); }
+
+.more { font-family: var(--sans); font-size: 0.95rem; margin-top: 1.75rem; }
+.empty { color: var(--muted); }
+
+/* ---------- post ---------- */
+
+.post-head {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+.post-head .post-meta { margin-top: 0.85rem; }
+
+.toc {
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 1.1rem 1.5rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--sans);
+  font-size: 0.94rem;
+}
+.toc-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+.toc ul { margin: 0; padding-left: 1.1rem; }
+.toc li { margin: 0.3rem 0; }
+.toc a { color: var(--muted); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+/* ---------- prose ---------- */
+
+/* Flow spacing: clear every child's margin, then put it back between
+   siblings only. Both rules are single-class specificity, so source order
+   decides — don't add `.prose p {margin:0}` style rules below, they'd win
+   and collapse the paragraph gaps. */
+.prose > * { margin-top: 0; margin-bottom: 0; }
+.prose > * + * { margin-top: 1.35rem; }
+
+.prose h2 {
+  font-size: 1.5rem;
+  padding-top: 0.4rem;
+}
+.prose h3 { font-size: 1.2rem; }
+.prose > h2 + * { margin-top: 1rem; }
+.prose > h3 + * { margin-top: 0.9rem; }
+.prose > * + h2 { margin-top: 3rem; }
+.prose > * + h3 { margin-top: 2.25rem; }
+
+.prose ul, .prose ol { padding-left: 1.4rem; }
+.prose li + li { margin-top: 0.45rem; }
+.prose li > ul, .prose li > ol { margin-top: 0.45rem; margin-bottom: 0; }
+
+.prose strong { font-weight: 650; }
+
+.prose blockquote {
+  margin: 1.75rem 0;
+  padding: 0.15rem 0 0.15rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  font-style: italic;
+}
+.prose blockquote p + p { margin-top: 0.9rem; }
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.75rem 0;
+}
+
+.prose img { max-width: 100%; height: auto; border-radius: 4px; }
+
+.heading-anchor {
+  margin-left: 0.4rem;
+  color: var(--rule);
+  text-decoration: none;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+h2:hover > .heading-anchor,
+h3:hover > .heading-anchor,
+h4:hover > .heading-anchor { opacity: 1; }
+.heading-anchor:hover { color: var(--accent); }
+.heading-anchor:focus { opacity: 1; }
+
+/* tables — wide content scrolls inside itself, page never scrolls sideways */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.94rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose th, .prose td {
+  text-align: left;
+  padding: 0.6rem 0.9rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.prose th { font-weight: 650; }
+
+/* ---------- code ---------- */
+
+code, kbd, samp, pre { font-family: var(--mono); }
+
+.prose :not(pre) > code {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.86em;
+  word-break: break-word;
+}
+
+.prose pre {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Chroma tokens, kept muted — code should read as text, not confetti. */
+.chroma .k, .chroma .kd, .chroma .kn, .chroma .kr, .chroma .kt { color: #8250df; }
+.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sd { color: #0a7d55; }
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .cs { color: #6a737d; font-style: italic; }
+.chroma .na, .chroma .nt { color: #0f6f7d; }
+.chroma .nf, .chroma .nb { color: #b3510a; }
+.chroma .m, .chroma .mi, .chroma .mf { color: #0550ae; }
+.chroma .o, .chroma .ow { color: var(--muted); }
+
+@media (prefers-color-scheme: dark) {
+  .chroma .k, .chroma .kd, .chroma .kn, .chroma .kr, .chroma .kt { color: #d2a8ff; }
+  .chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sd { color: #7ee787; }
+  .chroma .c, .chroma .c1, .chroma .cm, .chroma .cs { color: #8b949e; }
+  .chroma .na, .chroma .nt { color: #41e0ff; }
+  .chroma .nf, .chroma .nb { color: #ffa657; }
+  .chroma .m, .chroma .mi, .chroma .mf { color: #79c0ff; }
+}
+
+/* ---------- soft CTA ---------- */
+
+.post-cta {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 1rem;
+}
+.post-cta p { margin: 0; }
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 2.25rem 0 3rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.site-footer p { margin: 0 0 0.4rem; }
+.footer-contact a { color: var(--accent); }
+
+/* ---------- contact form (carried over; it already works) ---------- */
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-family: var(--sans);
+}
+.contact-form label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 0.65rem 0.75rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+.contact-form textarea { min-height: 8rem; resize: vertical; }
+.contact-form button {
+  justify-self: start;
+  background: var(--accent);
+  color: var(--bg);
+  border: 0;
+  border-radius: 5px;
+  padding: 0.7rem 1.4rem;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.contact-form button:hover { background: var(--accent-hi); }
+
+@media (max-width: 34rem) {
+  body { font-size: 1.06rem; }
+  main { padding: 2.5rem 0 3.5rem; }
+  .site-nav { gap: 0.9rem; font-size: 0.88rem; }
+}

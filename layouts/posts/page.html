@@ -1,0 +1,29 @@
+{{ define "main" }}
+<article class="wrap post">
+  <header class="post-head">
+    <h1>{{ .Title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      <span class="sep">·</span>{{ .ReadingTime }} min read
+      {{ with .Params.tags }}
+        <span class="sep">·</span>
+        {{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ (print "/tags/" (urlize $t) "/") | relURL }}">{{ $t }}</a>{{ end }}
+      {{ end }}
+    </p>
+    {{ with .Description }}<p class="post-standfirst">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ if gt (len .TableOfContents) 100 }}
+  <nav class="toc" aria-label="Table of contents">
+    <h2 class="toc-label">Contents</h2>
+    {{ .TableOfContents }}
+  </nav>
+  {{ end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{ partial "post-cta.html" . }}
+</article>
+{{ end }}

@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="wrap">
+
+  <section class="intro">
+    <h1>{{ .Title | default "Open-source IT for small behavioral health practices." }}</h1>
+    {{ with .Content }}<div class="intro-body">{{ . }}</div>{{ end }}
+  </section>
+
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ with $posts }}
+  <section class="home-writing">
+    <h2 class="section-label">Writing</h2>
+    <ul class="post-list">
+      {{ range first 6 . }}
+      <li class="post-item">
+        <a class="post-link" href="{{ .RelPermalink }}">
+          <h3 class="post-title">{{ .Title }}</h3>
+          {{ with .Description }}<p class="post-desc">{{ . }}</p>{{ end }}
+          <p class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            <span class="sep">·</span>{{ .ReadingTime }} min read
+          </p>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    {{ if gt (len .) 6 }}
+      <p class="more"><a href="{{ "/posts/" | relURL }}">All writing →</a></p>
+    {{ end }}
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

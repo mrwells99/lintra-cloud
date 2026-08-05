@@ -1,0 +1,58 @@
+baseURL = "https://lintra.cloud/"
+languageCode = "en-us"
+title = "Lintra"
+enableRobotsTXT = true
+enableGitInfo = false
+
+# Trailing-slash-free, readable URLs for posts.
+[permalinks]
+  posts = "/posts/:slug/"
+
+[params]
+  description = "HIPAA-conscious, open-source IT for small behavioral health and psychiatric practices. No Microsoft or Google lock-in."
+  email = "mwells@lintra.cloud"
+  phone = "(662) 292-3217"
+  phoneHref = "+16622923217"
+  location = "Little Rock, Arkansas"
+  author = "Michael Wells"
+
+[menus]
+  [[menus.main]]
+    name = "Writing"
+    pageRef = "/posts"
+    weight = 10
+  [[menus.main]]
+    name = "Services"
+    pageRef = "/services"
+    weight = 20
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+  [[menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 40
+
+[markup]
+  [markup.highlight]
+    # Class-based highlighting so code colours live in main.css and follow
+    # the light/dark theme instead of being burned into the HTML.
+    noClasses = false
+    lineNos = false
+    tabWidth = 2
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[taxonomies]
+  tag = "tags"
+
+[services.rss]
+  limit = 20
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
