@@ -2,8 +2,8 @@
   <div class="wrap header-inner">
     <a class="brand" href="{{ "/" | relURL }}">
       {{ with resources.Get "img/logo.png" }}
-        {{ with .Resize "72x png" }}
-          <img class="brand-mark" src="{{ .RelPermalink }}" width="36" height="{{ div (mul .Height 36) .Width }}" alt="">
+        {{ with .Resize "88x png" }}
+          <img class="brand-mark" src="{{ .RelPermalink }}" width="44" height="{{ div (mul .Height 44) .Width }}" alt="">
         {{ end }}
       {{ end }}
       <span class="brand-name">Lintra</span>
