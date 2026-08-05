@@ -3,10 +3,10 @@ title: "About"
 description: "Why Lintra exists, and who is behind it."
 ---
 
-I'm Michael Wells. I build and run open-source IT infrastructure for small
+I'm Matthew Wells. I build and run open-source IT infrastructure for small
 behavioral health and psychiatric practices, out of Little Rock, Arkansas.
 
-<!-- TODO (Michael): replace this paragraph with your actual background — where
+<!-- TODO (Matthew): replace this paragraph with your actual background — where
      you've worked in healthcare IT, how long, what you were responsible for,
      any certifications. This is the single highest-value paragraph on the site.
      In this niche the person IS the credibility, and it's the one thing I can't

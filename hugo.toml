@@ -14,7 +14,7 @@ enableGitInfo = false
   phone = "(662) 292-3217"
   phoneHref = "+16622923217"
   location = "Little Rock, Arkansas"
-  author = "Michael Wells"
+  author = "Matthew Wells"
 
 [menus]
   [[menus.main]]
