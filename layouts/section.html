@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  {{ with .Pages.ByDate.Reverse }}
+  <ul class="post-list">
+    {{ range . }}
+    <li class="post-item">
+      <a class="post-link" href="{{ .RelPermalink }}">
+        <h2 class="post-title">{{ .Title }}</h2>
+        {{ with .Description }}<p class="post-desc">{{ . }}</p>{{ end }}
+        <p class="post-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+          <span class="sep">·</span>{{ .ReadingTime }} min read
+        </p>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty">Nothing published here yet.</p>
+  {{ end }}
+</div>
+{{ end }}

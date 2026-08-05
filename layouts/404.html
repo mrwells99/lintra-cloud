@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="page-head">
+    <h1>Page not found</h1>
+  </header>
+  <div class="prose">
+    <p>That page doesn't exist — it may have moved.</p>
+    <p><a href="{{ "/posts/" | relURL }}">Browse the writing</a> or <a href="mailto:{{ site.Params.email }}">email me</a>.</p>
+  </div>
+</div>
+{{ end }}

@@ -65,7 +65,16 @@ Client Workstations
 
 **HIPAA-ready architecture:** For clients in regulated industries, the platform is designed to satisfy HIPAA technical safeguard requirements — encrypted data at rest and in transit, access controls via LDAP/SSO, audit logging via Wazuh, and minimum necessary access enforcement through RBAC in Keycloak.
 
-**Cloud storage without BAA complexity:** Nextcloud encrypts files server-side before upload to Backblaze B2. The storage provider never handles plaintext data, eliminating BAA requirements with the storage tier while keeping costs low.
+**Encrypted offsite storage — with a BAA, not instead of one:** Nextcloud encrypts files server-side before upload to Backblaze B2, so the storage provider never handles plaintext data. This is a defence-in-depth measure and a breach-notification safe harbour — it is *not* a substitute for a Business Associate Agreement. [HHS OCR guidance on cloud computing](https://www.hhs.gov/hipaa/for-professionals/special-topics/health-information-technology/cloud-computing/index.html) is explicit that a cloud provider maintaining encrypted ePHI it cannot decrypt is still a business associate and still requires a BAA; "no-view" status changes which party owns which safeguard, not whether the agreement is needed.
+
+**BAAs required across the whole hosting chain:** Any provider that stores, processes, or transmits ePHI on a client's behalf is a business associate. For this platform that means both the compute and storage tiers:
+
+| Provider | Role | BAA |
+|---|---|---|
+| DigitalOcean | Client droplets (plaintext ePHI at rest on disk) | Available on request via the trust centre; restricted to Covered Products and conditional on a paid Standard or Premium support plan — price that into per-client cost |
+| Backblaze B2 | Encrypted offsite storage | Available on request for business customers |
+
+Both agreements must be executed **before** any ePHI reaches the environment, and deployments must stay within the services each BAA actually covers. Confirm current terms directly with each provider — plan requirements and covered-product lists change.
 
 **Zero public exposure:** All services bind to Tailscale interfaces only. The DigitalOcean firewall drops everything that isn't Tailscale traffic. There is no publicly reachable attack surface.
 

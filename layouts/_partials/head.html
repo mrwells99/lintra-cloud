@@ -1,0 +1,23 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {{ partial "seo.html" . }}
+
+  {{ with resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+
+  {{ with resources.Get "img/logo.png" }}
+    {{ with .Resize "64x64 png" }}
+      <link rel="icon" type="image/png" href="{{ .RelPermalink }}">
+    {{ end }}
+    {{ with .Resize "180x180 png" }}
+      <link rel="apple-touch-icon" href="{{ .RelPermalink }}">
+    {{ end }}
+  {{ end }}
+
+  {{ with .OutputFormats.Get "rss" }}
+    <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{ end }}
+</head>

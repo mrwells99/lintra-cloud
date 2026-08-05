@@ -1,0 +1,21 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ "/" | relURL }}">
+      {{ with resources.Get "img/logo.png" }}
+        {{ with .Resize "88x png" }}
+          <img class="brand-mark" src="{{ .RelPermalink }}" width="44" height="{{ div (mul .Height 44) .Width }}" alt="">
+        {{ end }}
+      {{ end }}
+      <span class="brand-name">Lintra</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      {{ $current := . }}
+      {{ range site.Menus.main }}
+        {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+        <a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+      <a class="nav-email" href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+    </nav>
+  </div>
+</header>

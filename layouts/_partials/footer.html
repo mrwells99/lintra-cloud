@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-contact">
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+      <span class="sep">·</span>
+      <a href="tel:{{ site.Params.phoneHref }}">{{ site.Params.phone }}</a>
+    </p>
+    <p class="footer-meta">
+      Lintra · {{ site.Params.location }} · Built and run on open source.
+      {{ with site.Home.OutputFormats.Get "rss" }}<span class="sep">·</span> <a href="{{ .Permalink }}">RSS</a>{{ end }}
+    </p>
+  </div>
+</footer>
