@@ -8,6 +8,18 @@ enableGitInfo = false
 [permalinks]
   posts = "/posts/:slug/"
 
+# The logo lives at the repo root (it's uploaded there via the GitHub web UI).
+# Mount it into assets/ so Hugo can resize it, rather than keeping a second
+# copy of a 1.4 MB binary in the tree. Declaring any assets mount replaces the
+# default one, so assets/ itself has to be listed explicitly too.
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "lintra-logo.png"
+    target = "assets/img/logo.png"
+
 [params]
   description = "HIPAA-conscious, open-source IT for small behavioral health and psychiatric practices. No Microsoft or Google lock-in."
   email = "mwells@lintra.cloud"
